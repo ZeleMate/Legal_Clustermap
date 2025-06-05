@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+scipy
+nltk
+os
+openai
+dotenv
+tqdm
+regex
+sentence-transformers
+
+matplotlib

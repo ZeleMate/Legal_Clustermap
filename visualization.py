@@ -1,0 +1,35 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import LabelEncoder
+from models.embedder import model
+from data_loader import load_data
+from clustering import cluster_data
+from evaluation import evaluate_clusters
+
+def visualize_clusters(data_subset, kmeans_labels, pca_data):
+    # Csak az első 100 sort használjuk
+    data_subset = data_subset.iloc[:100]
+    
+    plt.figure(figsize=(12, 5))
+
+    # Klaszterek
+    plt.subplot(1, 2, 1)
+    plt.title("KMeans Clusters")
+    plt.scatter(pca_data[:, 0], pca_data[:, 1], c=kmeans_labels, cmap="tab10")
+    plt.xlabel("PCA 1")
+    plt.ylabel("PCA 2")
+
+    # Valós jogterületek
+    le = LabelEncoder()
+    colors = le.fit_transform(data_subset["JogTerulet"])
+
+    plt.subplot(1, 2, 2)
+    plt.title("Actual JogTerulet")
+    plt.scatter(pca_data[:, 0], pca_data[:, 1], c=colors, cmap="tab10")
+    plt.xlabel("PCA 1")
+    plt.ylabel("PCA 2")
+
+    plt.tight_layout()
+    plt.show() 

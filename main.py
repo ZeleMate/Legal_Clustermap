@@ -2,9 +2,21 @@ import pandas as pd
 import os
 import tqdm
 from sentence_transformers import SentenceTransformer
-from data_loader import load_data
+from data_loader import load_data, data_path
 from clustering import cluster_data
+from evaluation import evaluate_clusters
+from visualization import visualize_clusters
 
-embedded_data, data = load_data(load_data)
+def main(data, embedded_data, kmeans_labels, pca_data):
+    ari, silhouette, data_subset = evaluate_clusters(data, kmeans_labels, pca_data)
+    visualize_clusters(data_subset, kmeans_labels, pca_data)
 
-kmeans_labels, pca_data = cluster_data(load_data)
+    print(f"Adjusted Rand Index: {ari:.3f}")
+    print(f"Silhouette Score: {silhouette:.3f}")
+
+    print(data_subset[["JogTerulet", "cluster"]].groupby(["cluster", "JogTerulet"]).size())
+
+if __name__ == "__main__":
+    embedded_data, data = load_data(data_path)
+    kmeans_labels, pca_data = cluster_data(data, embedded_data)
+    main(data, embedded_data, kmeans_labels, pca_data)

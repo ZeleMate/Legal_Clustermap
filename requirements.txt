@@ -5,3 +5,5 @@ scipy
 nltk
 sentence-transformers
 matplotlib
+seaborn
+dotenv

@@ -1,23 +1,55 @@
 import pandas as pd
 from models.embedder import model
 import numpy as np
-data_path = '/Users/zelenyianszkimate/Documents/Szakdolgozat/processed_data/cleaned_data_for_embedding.csv'
+import logging
+import os
+from dotenv import load_dotenv
 
-def load_data(data_path):
-    data = pd.read_csv(data_path)
-    print("\n=== Adatok betöltése Debug ===")
-    print(f"Összes sor száma: {len(data)}")
-    print("\nJogterületek eloszlása az egész adatbázisban:")
-    print(data["JogTerulet"].value_counts())
+# Környezeti változók betöltése
+load_dotenv()
+
+# Adatok elérési útja környezeti változóból vagy relatív alapértelmezéssel
+DATA_PATH = os.getenv('DATA_PATH')
+
+def load_data():
+    """
+    Adatok betöltése a CSV fájlból.
     
-    # Véletlenszerűen választunk 1000 sort
-    sample_size = 1000
-    sampled_data = data.sample(n=sample_size, random_state=42)  # random_state a reprodukálhatóság miatt
+    Visszatérési érték:
+        pandas.DataFrame: A betöltött adatok
+    """
+    data = pd.read_csv(DATA_PATH)
+    logging.info(f"Összes sor száma: {len(data)}")
+    logging.info("\nJogterületek eloszlása az egész adatbázisban:")
+    logging.info(data["JogTerulet"].value_counts())
+    return data
+
+def load_subset(n_samples=1000, random_state=42):
+    """
+    Véletlenszerűen kiválasztott adatok betöltése és beágyazása.
     
+    Paraméterek:
+        n_samples (int): A kiválasztandó sorok száma
+        random_state (int): A véletlenszerűség seed értéke
+        
+    Visszatérési érték:
+        pandas.DataFrame: A kiválasztott és beágyazott adatok
+    """
+    # Adatok betöltése
+    data = load_data()
+    
+    # Véletlenszerűen választunk n_samples sort
+    sampled_data = data.sample(n=n_samples, random_state=random_state)
+    
+    # Szövegek beágyazása
     texts = sampled_data["text"].astype(str).tolist()
-    print(f"\nBetöltött szövegek száma: {len(texts)}")
-    print("\nJogterületek eloszlása a véletlenszerűen választott sorokban:")
-    print(sampled_data["JogTerulet"].value_counts())
-    
     embedded_data = np.array(model.encode(texts))
-    return embedded_data, sampled_data
+    
+    # Beágyazott adatok hozzáadása
+    sampled_data['Embedding'] = list(embedded_data)
+    
+    logging.info(f"\nBetöltött szövegek száma: {len(texts)}")
+    logging.info("\nJogterületek eloszlása a véletlenszerűen választott sorokban:")
+    logging.info(sampled_data["JogTerulet"].value_counts())
+    
+    return sampled_data

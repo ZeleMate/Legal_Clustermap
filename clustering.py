@@ -23,7 +23,7 @@ def cluster_data(data, embedded_data):
     print(f"pca_data alakja: {pca_data.shape}")
     print(f"pca_data első néhány eleme:\n{pca_data[:2]}")
     
-    kmeans = KMeans(n_clusters=5)
+    kmeans = KMeans(n_clusters=9, random_state=42)
     kmeans.fit(pca_data)
     
     print("\n4. KMeans információk:")

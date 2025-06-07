@@ -6,12 +6,11 @@ from sklearn.preprocessing import LabelEncoder
 from models.embedder import model
 from data_loader import load_data
 from clustering import cluster_data
-from evaluation import evaluate_clusters
 
-def visualize_clusters(data_subset, kmeans_labels, pca_data):
-    # Csak az első 100 sort használjuk
-    data_subset = data_subset.iloc[:100]
-    
+def visualize_clusters(data_subset, kmeans_labels, pca_data, le):
+    # Most már az összes sort használjuk
+    colors = data_subset["JogTerulet"]
+
     plt.figure(figsize=(12, 5))
 
     # Klaszterek
@@ -22,8 +21,7 @@ def visualize_clusters(data_subset, kmeans_labels, pca_data):
     plt.ylabel("PCA 2")
 
     # Valós jogterületek
-    le = LabelEncoder()
-    colors = le.fit_transform(data_subset["JogTerulet"])
+    colors = le
 
     plt.subplot(1, 2, 2)
     plt.title("Actual JogTerulet")
@@ -32,4 +30,4 @@ def visualize_clusters(data_subset, kmeans_labels, pca_data):
     plt.ylabel("PCA 2")
 
     plt.tight_layout()
-    plt.show() 
+    plt.show()

@@ -1,4 +1,4 @@
-# Jogi Szövegek Klaszterezése
+# BHGY Cluster
 
 Ez a projekt jogi szövegek automatikus klaszterezését végzi el modern gépi tanulási módszerekkel. A program beágyazza a jogi szövegeket, majd PCA-val csökkenti a dimenziót, automatikusan meghatározza az optimális klaszterszámot, KMeans klaszterezést alkalmaz, végül értékeli és vizualizálja az eredményeket.
 
@@ -27,11 +27,25 @@ Ez a projekt jogi szövegek automatikus klaszterezését végzi el modern gépi 
 
 1. Klónozd le a repository-t:
 ```bash
-git clone https://github.com/yourusername/jogi-klaszterezes.git
-cd jogi-klaszterezes
+git clone https://github.com/yourusername/BHGY_cluster.git
+cd BHGY_cluster
 ```
 
-2. Hozz létre és aktiválj egy virtuális környezetet:
+2. Válaszd ki a telepítési módszert:
+
+### Docker használatával (ajánlott)
+
+```bash
+# Docker image építése
+docker build -t bhgy-cluster .
+
+# Docker container futtatása
+docker run -it --rm -v $(pwd)/data:/app/data bhgy-cluster
+```
+
+### Helyi telepítés
+
+1. Hozz létre és aktiválj egy virtuális környezetet:
 ```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
@@ -39,7 +53,7 @@ source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate  # Windows
 ```
 
-3. Telepítsd a szükséges csomagokat:
+2. Telepítsd a szükséges csomagokat:
 ```bash
 pip install -r requirements.txt
 ```
@@ -66,6 +80,8 @@ python main.py
 ├── visualization.py     # Eredmények vizualizálása és utólagos metrikák
 ├── models/             # Modell definíciók
 │   └── embedder.py     # Szöveg beágyazó modell
+├── utils/              # Segédeszközök és segédfüggvények
+├── Dockerfile          # Docker konfiguráció
 ├── requirements.txt    # Függőségek
 └── README.md           # Dokumentáció
 ```
@@ -118,6 +134,7 @@ A program a következő főbb függőségeket használja:
 - matplotlib
 - seaborn
 - sentence-transformers (a beágyazó modellhez)
+- Docker (opcionális, ha Docker-t használsz)
 
 A teljes lista a `requirements.txt` fájlban található.
 

@@ -1,8 +1,8 @@
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
-from data_loader import load_subset
-from clustering import cluster_data
-from visualization import analyze_and_visualize
+from src.bhgy_cluster.data_loader import load_subset
+from src.bhgy_cluster.clustering import cluster_data
+from src.bhgy_cluster.visualization import analyze_and_visualize
 import logging
 
 # Logging beállítása

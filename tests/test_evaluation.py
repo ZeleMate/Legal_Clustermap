@@ -1,8 +1,8 @@
 import pytest
 import numpy as np
 import pandas as pd
-from bhgy_cluster.evaluation import evaluate_clusters
-from bhgy_cluster.evaluation import (
+from src.bhgy_cluster.evaluation import evaluate_clusters
+from src.bhgy_cluster.evaluation import (
     calculate_metrics,
     calculate_statistical_weights,
     calculate_composite_score

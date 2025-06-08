@@ -5,6 +5,9 @@ from sklearn.metrics import (
     davies_bouldin_score
 )
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+import pandas as pd
 
 def calculate_metrics(pca_data, labels):
     """
@@ -75,4 +78,37 @@ def find_optimal_clusters(pca_data, max_clusters=15):
         'calinski_scores': calinski_scores,
         'davies_scores': davies_scores,
         'composite_scores': composite_scores
-    } 
+    }
+
+def calculate_statistical_weights(metrics, debug=False):
+    metrics_df = pd.DataFrame([metrics])
+    scaler = StandardScaler()
+    metrics_normalized = scaler.fit_transform(metrics_df)
+    corr_matrix = np.corrcoef(metrics_normalized.T)
+    corr_matrix = np.nan_to_num(corr_matrix, nan=0.0)
+    np.fill_diagonal(corr_matrix, 1.0)
+    pca = PCA()
+    pca.fit(corr_matrix)
+    weights = pca.explained_variance_ratio_
+    if np.all(weights == 0):
+        weights = np.ones(len(metrics)) / len(metrics)
+    else:
+        weights = weights / weights.sum()
+    metric_weights = dict(zip(metrics.keys(), weights))
+    if debug:
+        print("\n=== Statisztikai súlyok számítása ===")
+        print("Korrelációs mátrix:")
+        print(pd.DataFrame(corr_matrix, index=metrics.keys(), columns=metrics.keys()))
+        print("\nFő komponensek varianciája:")
+        for i, var in enumerate(pca.explained_variance_ratio_):
+            print(f"PC{i+1}: {var:.3f}")
+        print("\nSzámított súlyok:")
+        for metric, weight in metric_weights.items():
+            print(f"{metric}: {weight:.3f}")
+    return metric_weights
+
+def calculate_composite_score(metrics, debug=False):
+    metrics['davies_bouldin'] = 1 - metrics['davies_bouldin']
+    weights = calculate_statistical_weights(metrics, debug)
+    composite_score = sum(metrics[metric] * weight for metric, weight in weights.items())
+    return composite_score 

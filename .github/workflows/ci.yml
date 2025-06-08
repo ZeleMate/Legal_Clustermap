@@ -14,9 +14,8 @@ jobs:
     - name: Kód klónozása
       uses: actions/checkout@v3
 
-    - name: Docker építése
+    - name: Docker image építése
       run: docker build -t bhgy-cluster .
 
-    - name: Program futtatása konténerben
-      run: |
-        docker run --rm bhgy-cluster
+    - name: Tesztek futtatása konténerben
+      run: docker run --rm bhgy-cluster

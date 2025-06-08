@@ -55,9 +55,9 @@ source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate  # Windows
 ```
 
-2. Telepítsd a szükséges csomagokat:
+2. Telepítsd a csomagot fejlesztői módban:
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ## Használat
@@ -76,16 +76,21 @@ python main.py
 ```
 .
 ├── main.py              # Program belépési pont
-├── data_loader.py       # Adatok betöltése és előfeldolgozása
-├── clustering.py        # Klaszterezési logika (PCA, optimális klaszterszám, KMeans)
-├── metrics.py           # Klaszterezési metrikák számítása
-├── visualization.py     # Eredmények vizualizálása és utólagos metrikák
-├── models/             # Modell definíciók
-│   └── embedder.py     # Szöveg beágyazó modell
-├── utils/              # Segédeszközök és segédfüggvények
-├── Dockerfile          # Docker konfiguráció
-├── requirements.txt    # Függőségek
-└── README.md           # Dokumentáció
+├── setup.py            # Csomag telepítési konfiguráció
+├── src/                # Forráskód könyvtár
+│   └── bhgy_cluster/   # Fő modul
+│       ├── data_loader.py    # Adatok betöltése és előfeldolgozása
+│       ├── clustering.py     # Klaszterezési logika (PCA, optimális klaszterszám, KMeans)
+│       ├── metrics.py        # Klaszterezési metrikák számítása
+│       ├── visualization.py  # Eredmények vizualizálása
+│       ├── evaluation.py     # Klaszterezés értékelése
+│       └── models/          # Modell definíciók
+├── tests/              # Tesztek
+├── data/              # Adatfájlok
+├── utils/             # Segédeszközök
+├── Dockerfile         # Docker konfiguráció
+├── requirements.txt   # Függőségek
+└── README.md          # Dokumentáció
 ```
 
 ## Működés
@@ -103,11 +108,12 @@ A program a következő lépéseket végzi:
    - KMeans klaszterezést alkalmaz
    - Debug információkat ír ki (opcionális)
 
-3. **Utólagos metrikák és vizualizáció** (`visualization.py`):
+3. **Értékelés és vizualizáció** (`evaluation.py`, `visualization.py`):
    - Kiszámítja a következő metrikákat: homogeneity, completeness, mutual_info, fowlkes_mallows, adjusted_rand, adjusted_mutual_info
    - Klaszterek eloszlását ábrázolja jogterületek szerint, feliratozott legendával
    - t-SNE vizualizáció a klaszterekről és jogterületekről
    - Metrikák ábrázolása
+   - Részletes klaszter elemzés és értékelés
 
 ## Kimenetek Értelmezése
 
@@ -125,6 +131,7 @@ A program a következő lépéseket végzi:
 - **Klaszterek eloszlása jogterületek szerint**: Oszlopdiagram, a legendában a jogterületek nevei szerepelnek
 - **t-SNE ábrázolás**: Két ábra, az egyik a klasztereket, a másik a jogterületeket mutatja
 - **Metrikák ábrázolása**: Oszlopdiagram a főbb metrikákról
+- **Klaszter elemzés**: Részletes statisztikák és vizualizációk a klaszterek belső szerkezetéről
 
 ## Függőségek
 
@@ -166,6 +173,7 @@ A bemeneti CSV fájlnak a következő oszlopokat kell tartalmaznia:
 - [ ] Hiperparaméter optimalizálás
 - [ ] Webes felület készítése
 - [ ] Több értékelési metrika hozzáadása
+- [ ] Batch feldolgozás implementálása nagyobb adathalmazokhoz
 
 ## .env használata
 

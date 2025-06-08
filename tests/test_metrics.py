@@ -1,6 +1,7 @@
 import pytest
 import numpy as np
-from metrics import calculate_metrics, find_optimal_clusters
+from bhgy_cluster.metrics import calculate_metrics, calculate_statistical_weights, calculate_composite_score
+from bhgy_cluster.metrics import find_optimal_clusters
 
 @pytest.fixture
 def sample_pca_data():

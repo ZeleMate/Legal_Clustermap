@@ -1,5 +1,7 @@
 # BHGY Cluster
 
+![CI](https://github.com/SAJÁT_USERNÉV/BHGY_cluster/actions/workflows/ci.yml/badge.svg)
+
 Ez a projekt jogi szövegek automatikus klaszterezését végzi el modern gépi tanulási módszerekkel. A program beágyazza a jogi szövegeket, majd PCA-val csökkenti a dimenziót, automatikusan meghatározza az optimális klaszterszámot, KMeans klaszterezést alkalmaz, végül értékeli és vizualizálja az eredményeket.
 
 ## Tartalomjegyzék

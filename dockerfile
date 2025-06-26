@@ -15,6 +15,7 @@ COPY . .
 RUN pip install -e .
 
 # 6. Tesztadatok létrehozása
+RUN mkdir -p /app/data
 RUN echo "text,JogTerulet\nTeszt szöveg 1,Polgári\nTeszt szöveg 2,Büntető\nTeszt szöveg 3,Polgári" > /app/data/test_data.csv
 
 # 7. Környezeti változó beállítása

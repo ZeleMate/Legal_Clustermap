@@ -19,6 +19,7 @@ RUN echo "text,JogTerulet\nTeszt szöveg 1,Polgári\nTeszt szöveg 2,Büntető\n
 
 # 7. Környezeti változó beállítása
 ENV DATA_PATH=/app/data/test_data.csv
+ENV PYTHONPATH=/app
 
 # 8. Alapértelmezett parancs – tesztek futtatása
 ENTRYPOINT ["pytest"]

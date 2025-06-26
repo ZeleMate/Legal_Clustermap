@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from src.bhgy_cluster.clustering import cluster_data
+from src.Legal_Clustermap.clustering import cluster_data
 
 @pytest.fixture
 def sample_embedded_data():

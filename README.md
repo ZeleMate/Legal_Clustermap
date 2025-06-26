@@ -1,6 +1,6 @@
-# BHGY Cluster
+# Legal Clustermap
 
-![CI](https://github.com/SAJÁT_USERNÉV/BHGY_cluster/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/ZeleMate/Legal_Clustermap/actions/workflows/ci.yml/badge.svg)
 
 Ez a projekt jogi szövegek automatikus klaszterezését végzi el modern gépi tanulási módszerekkel. A program beágyazza a jogi szövegeket, majd PCA-val csökkenti a dimenziót, automatikusan meghatározza az optimális klaszterszámot, KMeans klaszterezést alkalmaz, végül értékeli és vizualizálja az eredményeket.
 
@@ -29,8 +29,8 @@ Ez a projekt jogi szövegek automatikus klaszterezését végzi el modern gépi 
 
 1. Klónozd le a repository-t:
 ```bash
-git clone https://github.com/yourusername/BHGY_cluster.git
-cd BHGY_cluster
+git clone https://github.com/yourusername/Legal_Clustermap.git
+cd Legal_Clustermap
 ```
 
 2. Válaszd ki a telepítési módszert:
@@ -39,10 +39,10 @@ cd BHGY_cluster
 
 ```bash
 # Docker image építése
-docker build -t bhgy-cluster .
+docker build -t legal-clustermap .
 
 # Docker container futtatása
-docker run -it --rm -v $(pwd)/data:/app/data bhgy-cluster
+docker run -it --rm -v $(pwd)/data:/app/data legal-clustermap
 ```
 
 ### Helyi telepítés
@@ -78,7 +78,7 @@ python main.py
 ├── main.py              # Program belépési pont
 ├── setup.py            # Csomag telepítési konfiguráció
 ├── src/                # Forráskód könyvtár
-│   └── bhgy_cluster/   # Fő modul
+│   └── Legal_Clustermap/   # Fő modul
 │       ├── data_loader.py    # Adatok betöltése és előfeldolgozása
 │       ├── clustering.py     # Klaszterezési logika (PCA, optimális klaszterszám, KMeans)
 │       ├── metrics.py        # Klaszterezési metrikák számítása

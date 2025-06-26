@@ -1,8 +1,8 @@
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
-from src.bhgy_cluster.data_loader import load_subset
-from src.bhgy_cluster.clustering import cluster_data
-from src.bhgy_cluster.visualization import analyze_and_visualize
+from src.Legal_Clustermap.data_loader import load_subset
+from src.Legal_Clustermap.clustering import cluster_data
+from src.Legal_Clustermap.visualization import analyze_and_visualize
 import logging
 
 # Logging beállítása

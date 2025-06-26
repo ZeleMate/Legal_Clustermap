@@ -1,7 +1,25 @@
+# Git
+.git
+.gitignore
+.dockerignore
+
+# Virtual Environment
+venv/
+.venv/
+
+# Data - KRITIKUS
+data/
+
+# IDE / Editor specific
+.idea/
+.vscode/
+*.swp
+
+# Python cache
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-*.DS_Store
-*.ipynb
-venv/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/

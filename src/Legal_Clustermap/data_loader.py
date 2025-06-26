@@ -1,5 +1,5 @@
 import pandas as pd
-from bhgy_cluster.models.embedder import model
+from Legal_Clustermap.models.embedder import model
 import numpy as np
 import logging
 import os

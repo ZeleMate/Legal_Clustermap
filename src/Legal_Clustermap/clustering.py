@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
-from bhgy_cluster.metrics import find_optimal_clusters
+from Legal_Clustermap.metrics import find_optimal_clusters
 
 def cluster_data(embedded_data, debug=False):
     """

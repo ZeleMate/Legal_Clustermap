@@ -2,7 +2,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from src.bhgy_cluster.data_loader import load_data, load_subset
+from src.Legal_Clustermap.data_loader import load_data, load_subset
 
 @pytest.fixture
 def sample_data():

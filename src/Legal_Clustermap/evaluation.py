@@ -98,7 +98,10 @@ def calculate_statistical_weights(metrics, debug=False):
         corr_matrix = corr_matrix.fillna(0)
         
         # Tökéletes korrelációk kezelése
-        np.fill_diagonal(corr_matrix.values, 1.0)
+        # pandas 3 (copy-on-write) returns a read-only .values, so set the diagonal on a copy.
+        corr_values = corr_matrix.to_numpy(copy=True)
+        np.fill_diagonal(corr_values, 1.0)
+        corr_matrix = pd.DataFrame(corr_values, index=corr_matrix.index, columns=corr_matrix.columns)
         
         # Súlyok számítása a variancia alapján
         weights = np.var(metrics_normalized, axis=0)

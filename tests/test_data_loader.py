@@ -24,7 +24,7 @@ def test_load_subset():
     """Teszteli az adatok részhalmazának betöltését."""
     n_samples = 100
     data = load_subset(n_samples=n_samples, random_state=42)
-    
+
     assert isinstance(data, pd.DataFrame)
     assert len(data) <= n_samples
     assert 'text' in data.columns
@@ -35,7 +35,7 @@ def test_load_subset():
 def test_load_subset_embeddings():
     """Teszteli a beágyazások helyességét."""
     data = load_subset(n_samples=10, random_state=42)
-    
+
     # Ellenőrizzük, hogy minden beágyazás megfelelő dimenziójú
     embedding_dim = len(data['Embedding'].iloc[0])
     assert all(len(emb) == embedding_dim for emb in data['Embedding'])

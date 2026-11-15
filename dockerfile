@@ -1,5 +1,5 @@
 # 1. Hivatalos Python báziskép
-FROM python:3.12-slim
+FROM python:3.15-slim
 
 # 2. Munkakönyvtár létrehozása a konténeren belül
 WORKDIR /app
